@@ -96,3 +96,4 @@ The source itself notes that the syllabus image says “10 Weeks” while the la
 
 The source environment used to assemble this deliverable has Node.js and JDK 21 available, but Maven and Docker executables are not installed in the execution environment. Therefore the project files were internally cross-checked for endpoint/import/route consistency, while `mvn clean test`, `mvn clean package`, and `docker compose build` must be run on a machine with Maven/Docker installed. `npm install` could not complete in the restricted build environment because package installation requires external registry access.
 "# Fit-bite" 
+"# Fit-bite" 
