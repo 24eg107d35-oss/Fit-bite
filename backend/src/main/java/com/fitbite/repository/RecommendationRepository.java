@@ -1,0 +1,1 @@
+package com.fitbite.repository; import com.fitbite.entity.Recommendation; import java.util.*; import org.springframework.data.jpa.repository.JpaRepository; public interface RecommendationRepository extends JpaRepository<Recommendation,Long>{ List<Recommendation> findTop10ByUserIdOrderByScoreDesc(Long userId); void deleteByUserId(Long userId); }

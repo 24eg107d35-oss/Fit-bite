@@ -1,0 +1,2 @@
+package com.fitbite.dto; import jakarta.validation.constraints.*;
+public final class PreferenceDtos { private PreferenceDtos(){} public record PreferenceRequest(String dietaryType,String healthGoal,@Min(1) Integer maxCalories,@Min(0) Integer minProtein,@Min(1) Integer maxCookingTime){} public record ProfileResponse(Long id,String name,String email,String role,String dietaryType,String healthGoal,Integer maxCalories,Integer minProtein,Integer maxCookingTime){} }

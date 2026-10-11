@@ -1,0 +1,1 @@
+package com.fitbite.repository; import com.fitbite.entity.Nutrition; import java.util.Optional; import org.springframework.data.jpa.repository.JpaRepository; public interface NutritionRepository extends JpaRepository<Nutrition,Long>{ Optional<Nutrition> findByRecipeId(Long recipeId); }

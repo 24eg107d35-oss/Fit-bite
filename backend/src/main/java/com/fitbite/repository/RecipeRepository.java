@@ -1,0 +1,7 @@
+package com.fitbite.repository;
+import com.fitbite.entity.Recipe; import org.springframework.data.domain.*; import org.springframework.data.jpa.repository.*; import org.springframework.data.repository.query.Param; import java.util.*;
+public interface RecipeRepository extends JpaRepository<Recipe,Long>{
+ @Query("select distinct r from Recipe r left join r.ingredients ri left join ri.ingredient i left join r.healthGoals hg where (:q='' or lower(r.name) like lower(concat('%',:q,'%')) or lower(r.description) like lower(concat('%',:q,'%')) or lower(i.name) like lower(concat('%',:q,'%'))) and (:meal='' or lower(r.mealType)=lower(:meal)) and (:cuisine='' or lower(r.cuisine)=lower(:cuisine)) and (:diet='' or lower(r.dietaryTags) like lower(concat('%',:diet,'%'))) and (:health='' or lower(hg.name)=lower(:health)) and (:maxCalories is null or r.calories<=:maxCalories) and (:minProtein is null or r.protein>=:minProtein) and (:maxTime is null or r.totalTime<=:maxTime) and (:difficulty='' or lower(r.difficulty)=lower(:difficulty))")
+ Page<Recipe> search(@Param("q") String q,@Param("meal") String meal,@Param("cuisine") String cuisine,@Param("diet") String diet,@Param("health") String health,@Param("maxCalories") Double maxCalories,@Param("minProtein") Double minProtein,@Param("maxTime") Integer maxTime,@Param("difficulty") String difficulty,Pageable pageable);
+ List<Recipe> findTop8ByOrderByCreatedAtDesc();
+}

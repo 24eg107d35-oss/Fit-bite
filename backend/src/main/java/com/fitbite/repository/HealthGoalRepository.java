@@ -1,0 +1,1 @@
+package com.fitbite.repository; import com.fitbite.entity.HealthGoal; import java.util.*; import org.springframework.data.jpa.repository.JpaRepository; public interface HealthGoalRepository extends JpaRepository<HealthGoal,Long>{ Optional<HealthGoal> findByNameIgnoreCase(String name); }

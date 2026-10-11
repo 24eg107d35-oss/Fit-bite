@@ -1,0 +1,11 @@
+package com.fitbite.controller;
+import com.fitbite.dto.*; import com.fitbite.dto.RecipeDtos.*; import com.fitbite.service.RecipeService; import jakarta.validation.Valid; import org.springframework.data.domain.Page; import org.springframework.security.access.prepost.PreAuthorize; import org.springframework.web.bind.annotation.*;
+@RestController @RequestMapping("/api/recipes") public class RecipeController{private final RecipeService service;public RecipeController(RecipeService service){this.service=service;}
+ @GetMapping({"","/search","/filter"}) public ApiResponse<Page<RecipeSummary>> search(@RequestParam(defaultValue="")String q,@RequestParam(defaultValue="")String meal,@RequestParam(defaultValue="")String cuisine,@RequestParam(defaultValue="")String diet,@RequestParam(defaultValue="")String health,@RequestParam(required=false)Double maxCalories,@RequestParam(required=false)Double minProtein,@RequestParam(required=false)Integer maxTime,@RequestParam(defaultValue="")String difficulty,@RequestParam(defaultValue="0")int page,@RequestParam(defaultValue="12")int size,@RequestParam(defaultValue="name")String sort){return ApiResponse.ok("Recipes fetched successfully",service.search(q,meal,cuisine,diet,health,maxCalories,minProtein,maxTime,difficulty,page,size,sort));}
+ @GetMapping("/{id}") public ApiResponse<RecipeDetail> get(@PathVariable Long id){return ApiResponse.ok("Recipe fetched successfully",service.get(id));}
+ @PostMapping @PreAuthorize("hasRole('ADMIN')") public ApiResponse<RecipeDetail> create(@Valid @RequestBody RecipeRequest r){return ApiResponse.ok("Recipe created successfully",service.create(r));}
+ @PutMapping("/{id}") @PreAuthorize("hasRole('ADMIN')") public ApiResponse<RecipeDetail> update(@PathVariable Long id,@Valid @RequestBody RecipeRequest r){return ApiResponse.ok("Recipe updated successfully",service.update(id,r));}
+ @DeleteMapping("/{id}") @PreAuthorize("hasRole('ADMIN')") public ApiResponse<Void> delete(@PathVariable Long id){service.delete(id);return ApiResponse.ok("Recipe deleted successfully",null);}
+ @PostMapping("/{id}/view") @PreAuthorize("isAuthenticated()") public ApiResponse<Void> view(@PathVariable Long id){service.recordView(id);return ApiResponse.ok("View recorded",null);}
+ @GetMapping("/recent") public ApiResponse<?> recent(){return ApiResponse.ok("Recent recipes",service.recent());}
+}

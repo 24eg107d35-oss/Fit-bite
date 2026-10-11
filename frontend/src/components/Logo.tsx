@@ -1,0 +1,1 @@
+import {Leaf} from 'lucide-react'; import {Link} from 'react-router-dom'; export default function Logo(){return <Link className="logo" to="/"><span className="logo-mark"><Leaf size={20}/></span><span>Fit<span>Bite</span></span></Link>}

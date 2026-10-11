@@ -1,0 +1,1 @@
+package com.fitbite.repository; import com.fitbite.entity.*; import java.util.*; import org.springframework.data.jpa.repository.*; public interface RecipeHistoryRepository extends JpaRepository<RecipeHistory,Long>{ List<RecipeHistory> findTop10ByUserIdOrderByViewedAtDesc(Long userId); }

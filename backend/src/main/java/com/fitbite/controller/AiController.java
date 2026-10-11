@@ -1,0 +1,2 @@
+package com.fitbite.controller; import com.fitbite.ai.AiService; import com.fitbite.dto.*; import com.fitbite.dto.AiDtos.*; import jakarta.validation.Valid; import org.springframework.web.bind.annotation.*;
+@RestController @RequestMapping("/api/ai") public class AiController{private final AiService ai;public AiController(AiService ai){this.ai=ai;}@PostMapping("/chat") public ApiResponse<ChatResponse> chat(@Valid @RequestBody ChatRequest r){return ApiResponse.ok("AI response generated",ai.chat(r.message()));}}

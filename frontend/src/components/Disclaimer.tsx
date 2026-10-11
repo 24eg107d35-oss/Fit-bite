@@ -1,0 +1,1 @@
+export default function Disclaimer(){return <div className="disclaimer"><strong>Health information notice:</strong> FitBite provides general dietary guidance and recipe suggestions, not medical diagnosis or treatment. Individual needs vary. Discuss significant dietary changes or health conditions with a qualified healthcare professional.</div>}

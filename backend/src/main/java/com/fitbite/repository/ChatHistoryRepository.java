@@ -1,0 +1,1 @@
+package com.fitbite.repository; import com.fitbite.entity.ChatHistory; import java.util.*; import org.springframework.data.jpa.repository.JpaRepository; public interface ChatHistoryRepository extends JpaRepository<ChatHistory,Long>{ List<ChatHistory> findTop20ByUserIdOrderByCreatedAtDesc(Long userId); }
