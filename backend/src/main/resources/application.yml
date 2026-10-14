@@ -2,13 +2,14 @@ spring:
   application:
     name: fitbite-backend
   datasource:
-    url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME:fitbite}?sslMode=${DB_SSL_MODE:DISABLED}&allowPublicKeyRetrieval=true&serverTimezone=UTC&enabledTLSProtocols=TLSv1.2,TLSv1.3
+    url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME:fitbite}?sslMode=${DB_SSL_MODE:DISABLED}&allowPublicKeyRetrieval=true&serverTimezone=UTC&enabledTLSProtocols=TLSv1.2,TLSv1.3&connectTimeout=30000
     username: ${DB_USERNAME:root}
     password: ${DB_PASSWORD:root}
   jpa:
     hibernate:
       ddl-auto: update
     open-in-view: false
+    database-platform: org.hibernate.dialect.MySQLDialect
     properties:
       hibernate:
         format_sql: true

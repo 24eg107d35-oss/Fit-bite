@@ -21,7 +21,7 @@ services:
       - key: DB_PASSWORD
         value: sTCxiBTP88GNaMT8
       - key: DB_SSL_MODE
-        value: VERIFY_IDENTITY
+        value: REQUIRED
       - key: JWT_SECRET
         generateValue: true
       - key: CORS_ALLOWED_ORIGINS
