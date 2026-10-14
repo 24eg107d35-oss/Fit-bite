@@ -47,7 +47,7 @@ Copy `frontend/.env.example` to `frontend/.env` and set `VITE_API_BASE_URL=http:
 
 ## 4. Development accounts
 
-The development seeder creates these only when the database has no users:
+The development seeder creates these only when `SEED_DEMO_USERS=true` and the database has no users. Docker Compose enables this for local development; production deployment disables it.
 
 - Admin: `admin@fitbite.local` / `Admin@12345`
 - Demo user: `demo@fitbite.local` / `Demo@12345`

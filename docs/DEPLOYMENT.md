@@ -7,23 +7,16 @@
 3. Open the frontend at `http://localhost:5173`.
 4. Open API docs at `http://localhost:8080/swagger-ui.html`.
 
-## Cloud pattern
+## Free Render backend, Aiven MySQL, and Vercel frontend
 
-Frontend can be deployed to Vercel/Netlify or another static React host. Backend can be deployed to a Spring Boot-compatible service such as Render/Railway or a managed VM. MySQL should use a managed database in production.
+The repository includes a Render Blueprint at `render.yaml` for a free Spring Boot web service. Use it with Aiven's free MySQL service; Render's own MySQL container needs a paid private service and persistent disk. The Aiven free plan is limited to 1 GB storage and may be powered off after extended inactivity. Render's free web service sleeps after 15 minutes without requests, so the first API call after idle can take about a minute. This setup is for a small demo, not production traffic.
 
-Set these backend variables in the hosting platform:
+1. Create an Aiven for MySQL service on its Free plan. From its connection details, copy the host, port, database name, username, and password. Aiven's default database is `defaultdb`.
+2. Push the repository to GitHub.
+3. In Render, create a Blueprint from this repository and choose the Free plan. When prompted, enter the Aiven values for `DB_HOST`, `DB_PORT`, `DB_USERNAME`, and `DB_PASSWORD`. `DB_SSL_MODE` is already set to `REQUIRED`; Render generates `JWT_SECRET`.
+4. After deployment, copy the backend's public `onrender.com` URL and check `<backend-url>/actuator/health` for `{"status":"UP"}`.
+5. In the Vercel project settings, add `VITE_API_BASE_URL` with the value `<backend-url>/api` (include `https://`) and redeploy the frontend.
 
-- DB_HOST
-- DB_PORT
-- DB_NAME
-- DB_USERNAME
-- DB_PASSWORD
-- JWT_SECRET
-- CORS_ALLOWED_ORIGINS
-- LLM_BASE_URL
-- LLM_API_KEY
-- LLM_MODEL
+The backend allows requests from `https://fit-bite-eta.vercel.app`. If the Vercel domain changes, update `CORS_ALLOWED_ORIGINS` on Render to the exact frontend origin, then redeploy the backend. Demo/admin seed accounts are disabled; recipe and health-goal data are seeded automatically.
 
-Build frontend with `VITE_API_BASE_URL` pointing to the public backend `/api` URL.
-
-For production, replace `ddl-auto=update` with a migration system such as Flyway/Liquibase and use a managed secret store.
+For production, replace `ddl-auto=update` with a migration system such as Flyway/Liquibase and configure regular database backups.

@@ -31,7 +31,8 @@ services:
       DB_USERNAME: ${DB_USERNAME:-fitbite}
       DB_PASSWORD: ${DB_PASSWORD:-fitbite_password}
       JWT_SECRET: ${JWT_SECRET:-replace-with-a-real-secret-at-least-32-characters}
-      CORS_ALLOWED_ORIGINS: http://localhost:5173
+      SEED_DEMO_USERS: ${SEED_DEMO_USERS:-true}
+      CORS_ALLOWED_ORIGINS: http://localhost:5173,https://transport-aquatic-heard-something.trycloudflare.com
       LLM_BASE_URL: ${LLM_BASE_URL:-}
       LLM_API_KEY: ${LLM_API_KEY:-}
       LLM_MODEL: ${LLM_MODEL:-}
